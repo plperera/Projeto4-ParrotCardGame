@@ -1,7 +1,9 @@
-.caixa-conteudo{
+body{
     background-color: #EEF9BF;
+}
+.caixa-conteudo{
+    
     width: 100%;
-    height: 1110px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +24,7 @@
     margin-bottom: 100px;
     
 }
-.caixa-cartas-A, .caixa-cartas-B{
+.caixa-cartas-A{
     margin: 17px 0;
     display: flex;
     align-items: center;
@@ -63,3 +65,19 @@
   .giragira {
     animation: giragira 0.4s linear infinite;
   }
+
+@media (max-width: 900px){
+
+    .caixa-cartas-A{
+        width: 100%;
+    }
+
+}
+@media (max-width: 560px){
+
+    .caixa-conteudo h1{
+        font-size: 36px;
+        text-align: center;
+    }
+
+}

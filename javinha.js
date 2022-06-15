@@ -1,6 +1,8 @@
-jaTaVirada = ""
-pontos = 0
-numeroDeCartas = 0
+jaTaVirada = "";
+pontos = 0;
+numeroDeCartas = 0;
+trava = 0;
+stringDeErro = "";
 
 function comparador() { 
 	return Math.random() - 0.5; 
@@ -78,13 +80,24 @@ function converterLista(lista){
 
 }
 
-function quantidadeDeCartas(){
+function quantidadeDeCartas(erro){    
 
-    const numero = prompt("Com quantas cartas você deseja jogar (LEMBRE DE COLOCAR UM NUMERO PAR) ?");
-    let lista = listaAleatoria(numero);
-    10
-    cartasNaMesa(lista)
-}
+    const numero = prompt("Com quantas cartas você deseja jogar ? " + erro);
+
+    if (numero % 2 === 0 && numero <= 12){
+
+        let lista = listaAleatoria(numero);; 
+        cartasNaMesa(lista);
+
+    } else {
+
+        stringDeErro = "\nLembre-se de colocar um número par menor que 12";
+        quantidadeDeCartas(stringDeErro);
+
+    }
+
+}    
+
 function cartasNaMesa(lista){
 
     numeroDeCartas = lista.length;
@@ -160,11 +173,12 @@ function fimDeJogo(){}
 function clicou (elemento){
 
     //contador de jogadas++
-    
-    //verificar se tem alguma virada
-    
+    if( trava === 0 ){
 
     if( document.querySelector(".virada") !== null ){
+
+        let carta1 = document.querySelector(".virada")
+        let carta2 = elemento
 
         elemento.classList.toggle("virada");
         elemento.childNodes[1].classList.remove("lado-de-cima");
@@ -176,18 +190,22 @@ function clicou (elemento){
                 pontos += 2;
                 document.querySelector(".virada").classList.remove("virada");
                 document.querySelector(".virada").classList.remove("virada");
+                trava = 0;
             } 
             else{
+
+                trava = 1;
             
             setTimeout(function(){
-                    document.querySelector(".virada").classList.add("giragira");
-                    elemento.classList.add("giragira")
+
+                    carta1.classList.add("giragira");
+                    carta2.classList.add("giragira")
 
                 
                 setTimeout(function(){
 
-                    document.querySelector(".virada").classList.remove("giragira");
-                    elemento.classList.remove("giragira")
+                    carta1.classList.remove("giragira");
+                    carta2.classList.remove("giragira")
 
                 }, 500);
 
@@ -204,6 +222,7 @@ function clicou (elemento){
                         document.querySelector(".virada").childNodes[3].classList.add("lado-de-baixo");   
                         document.querySelector(".virada").childNodes[3].classList.remove("lado-de-cima");                        
                         document.querySelector(".virada").classList.remove("virada");
+                        trava = 0
                     
                 },500);
             },600);
@@ -236,9 +255,9 @@ function clicou (elemento){
 
     //elemento.classList.toggle(virada)
     
-
+}
 }
 10
-quantidadeDeCartas()
+quantidadeDeCartas(stringDeErro)
 
 
