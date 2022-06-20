@@ -11,6 +11,7 @@ lista = []
 
 
 
+
 function comparador() { 
 	return Math.random() - 0.5; 
 }
@@ -41,8 +42,6 @@ function clickTeste(elemento){
                         elemento.childNodes[1].classList.toggle("rodou");
                         elemento.childNodes[3].classList.toggle("rodou");
                         elemento.classList.toggle("giragira")
-
-                        trava = "sem trava"
                         
                         }, 500);
 
@@ -55,6 +54,9 @@ function clickTeste(elemento){
                         document.querySelector(".foiClicado").classList.remove("foiClicado")
                         
                         pontos += 2
+
+                        trava = "sem trava"
+                        
                         terminou()
                         
 
@@ -121,7 +123,8 @@ function clickTeste(elemento){
 }
 
 function cartasNaMesa(){
-    quantidade = prompt("Manda")
+    quantidade = prompt("Com quantas cartas você quer jogar ? \nLembre-se de colocar um numero par")
+    if (quantidade % 2 !== 0){ cartasNaMesa() }
     const elemento = document.querySelector(".caixa-cartas")
 
     for (let i = 0; i < quantidade; i++){
@@ -161,6 +164,27 @@ function terminou(){
     if (Number(pontos) === Number(quantidade)){
 
         alert(`Você ganhou em ${jogadas} jogadas!`)
+
+        /*
+        if (prompt('Bora mais uma ?', 'Bora') === "Bora") {
+
+            document.querySelector(".caixa-cartas").innerHTML = ""
+            
+            jaTaVirada = "";
+            pontos = 0;
+            numeroDeCartas = 0;
+            trava = "sem trava";
+            stringDeErro = "";
+            click1 = "nada";
+            click2 = "nada mesmo";
+            quantidade = 0;
+            jogadas = 0;
+            lista = []
+
+            cartasNaMesa()
+        }
+        */
+
     }
     }, 1100);
     
