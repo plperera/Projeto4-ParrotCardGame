@@ -3,13 +3,13 @@ pontos = 0;
 numeroDeCartas = 0;
 trava = "sem trava";
 stringDeErro = "";
-click1 = "nada"
-click2 = "nada mesmo"
-
-
-//////////////////////////
-
+click1 = "nada";
+click2 = "nada mesmo";
+quantidade = 0;
+jogadas = 0;
 lista = []
+
+
 
 function comparador() { 
 	return Math.random() - 0.5; 
@@ -22,7 +22,6 @@ function clickTeste(elemento){
 
         let viradaParaCima = elemento.getAttribute('class');
 
-        console.log(viradaParaCima)
         if(viradaParaCima !== "carta foiClicado" && viradaParaCima !== "carta acertou" ){
             if(trava === "sem trava"){
 
@@ -31,6 +30,8 @@ function clickTeste(elemento){
                 if (document.querySelector(".foiClicado") !== null){
                     
                     click2 = elemento.childNodes[1].childNodes[1].getAttribute('src')
+
+                    jogadas++
 
                     elemento.classList.toggle("giragira")
                     elemento.classList.toggle("foiClicado")
@@ -53,7 +54,8 @@ function clickTeste(elemento){
                         document.querySelector(".foiClicado").classList.add("acertou")
                         document.querySelector(".foiClicado").classList.remove("foiClicado")
                         
-                        //pontos + 1
+                        pontos += 2
+                        terminou()
                         
 
                     }
@@ -90,12 +92,12 @@ function clickTeste(elemento){
 
                         }, 1000);                               
                     }
-                    
-                    
-                
+                                 
                 } else {
 
                     click1 = elemento.childNodes[1].childNodes[1].getAttribute('src')
+
+                    jogadas++
 
                     elemento.classList.toggle("giragira")
                     elemento.classList.toggle("foiClicado")
@@ -115,10 +117,11 @@ function clickTeste(elemento){
             }
         }
     }
+
 }
 
 function cartasNaMesa(){
-    const quantidade = prompt("Manda")
+    quantidade = prompt("Manda")
     const elemento = document.querySelector(".caixa-cartas")
 
     for (let i = 0; i < quantidade; i++){
@@ -151,6 +154,16 @@ function cartasNaMesa(){
     
     console.log(lista)
 
+}
+function terminou(){
+
+    setTimeout(function(){
+    if (Number(pontos) === Number(quantidade)){
+
+        alert(`Você ganhou em ${jogadas} jogadas!`)
+    }
+    }, 1100);
+    
 }
 
 cartasNaMesa()
