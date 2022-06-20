@@ -65,12 +65,14 @@ body{
 .carta-frente img{
     width: 40px;
     height: 40px;
+   
     
 }
 .carta-costa{
    
     position: relative;
     backface-visibility: hidden;
+   
 
 }
 .carta-costa img{
@@ -87,6 +89,7 @@ body{
 
 .rodou{
     transform: rotateY(180deg);
+   
 }
 
 @keyframes giragira {
@@ -96,18 +99,18 @@ body{
       }
 
     50% {
-        transform: rotateY(-90deg);
+        transform: rotateY(-180deg);
  
     }
 
     100% {
-      transform: rotateY(-180deg);
+      transform: rotateY(-360deg);
       
     }
   }
 
   .giragira {
-    animation: giragira 0.5s linear 1;
+    animation: giragira 1s linear 1;
   }
 
 

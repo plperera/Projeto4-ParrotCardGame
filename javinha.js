@@ -1,117 +1,120 @@
 jaTaVirada = "";
 pontos = 0;
 numeroDeCartas = 0;
-trava = 0;
+trava = "sem trava";
 stringDeErro = "";
+click1 = "nada"
+click2 = "nada mesmo"
+
+
 //////////////////////////
+
 lista = []
 
 function comparador() { 
 	return Math.random() - 0.5; 
 }
 
-function clicou (elemento){
-
-    //contador de jogadas++
-    if( trava === 0 ){
-
-    if( document.querySelector(".virada") !== null ){
-
-        let carta1 = document.querySelector(".virada")
-        let carta2 = elemento
-
-        elemento.classList.toggle("virada");
-        elemento.childNodes[1].classList.remove("lado-de-cima");
-        elemento.childNodes[1].classList.add("lado-de-baixo");
-        elemento.childNodes[3].classList.remove("lado-de-baixo");
-        elemento.childNodes[3].classList.add("lado-de-cima");
-
-            if( jaTaVirada == elemento.childNodes[3].getAttribute('src')){
-                pontos += 2;
-                document.querySelector(".virada").classList.remove("virada");
-                document.querySelector(".virada").classList.remove("virada");
-                trava = 0;
-            } 
-            else{
-
-                trava = 1;
-            
-            setTimeout(function(){
-
-                    carta1.classList.add("giragira");
-                    carta2.classList.add("giragira")
-
-                
-                setTimeout(function(){
-
-                    carta1.classList.remove("giragira");
-                    carta2.classList.remove("giragira")
-
-                }, 500);
-
-                setTimeout(function(){
-                    
-                        document.querySelector(".virada").childNodes[1].classList.add("lado-de-cima");
-                        document.querySelector(".virada").childNodes[1].classList.remove("lado-de-baixo");
-                        document.querySelector(".virada").childNodes[3].classList.add("lado-de-baixo");   
-                        document.querySelector(".virada").childNodes[3].classList.remove("lado-de-cima"); 
-                        document.querySelector(".virada").classList.remove("virada");
-
-                        document.querySelector(".virada").childNodes[1].classList.add("lado-de-cima");
-                        document.querySelector(".virada").childNodes[1].classList.remove("lado-de-baixo");
-                        document.querySelector(".virada").childNodes[3].classList.add("lado-de-baixo");   
-                        document.querySelector(".virada").childNodes[3].classList.remove("lado-de-cima");                        
-                        document.querySelector(".virada").classList.remove("virada");
-                        trava = 0
-                    
-                },500);
-            },600);
-            }
-
-    } else {
-
-        elemento.classList.toggle("virada");
-        elemento.childNodes[1].classList.add("lado-de-baixo");
-        elemento.childNodes[1].classList.remove("lado-de-cima");
-        elemento.childNodes[3].classList.add("lado-de-cima");
-        elemento.childNodes[3].classList.remove("lado-de-baixo");
-        jaTaVirada = document.querySelector(".virada").childNodes[3].getAttribute('src')
-    }
-        //tem
-            //virar a clicada
-                //comparar
-                    //é igual
-                        //mudar classe para correto
-                            //colocar no contador de corretos +2
-                            //verificar se estão todas corretas
-                    
-                    //é igual não
-                        //virar carta para baixo
-        
-        //tem nao
-            //virar carta
-
-            
-
-    //elemento.classList.toggle(virada)
-    
-}
-}
-
 function clickTeste(elemento){
 
-    console.log(elemento)
 
-    elemento.classList.toggle("giragira")
-    
-    setTimeout(function(){
-        
-        elemento.childNodes[1].classList.toggle("rodou");
-        elemento.childNodes[3].classList.toggle("rodou");
-        elemento.classList.toggle("giragira")
-        
-        }, 500);
-  
+    if (elemento.getAttribute('src') === null){
+
+        let viradaParaCima = elemento.getAttribute('class');
+
+        console.log(viradaParaCima)
+        if(viradaParaCima !== "carta foiClicado" && viradaParaCima !== "carta acertou" ){
+            if(trava === "sem trava"){
+
+                trava = "travou"
+
+                if (document.querySelector(".foiClicado") !== null){
+                    
+                    click2 = elemento.childNodes[1].childNodes[1].getAttribute('src')
+
+                    elemento.classList.toggle("giragira")
+                    elemento.classList.toggle("foiClicado")
+
+                    setTimeout(function(){
+                        
+                        elemento.childNodes[1].classList.toggle("rodou");
+                        elemento.childNodes[3].classList.toggle("rodou");
+                        elemento.classList.toggle("giragira")
+
+                        trava = "sem trava"
+                        
+                        }, 500);
+
+                    if (click1 === click2){
+
+                        document.querySelector(".foiClicado").classList.add("acertou")
+                        document.querySelector(".foiClicado").classList.remove("foiClicado")
+                        
+                        document.querySelector(".foiClicado").classList.add("acertou")
+                        document.querySelector(".foiClicado").classList.remove("foiClicado")
+                        
+                        //pontos + 1
+                        
+
+                    }
+                    else {
+
+                        
+                        setTimeout(function(){
+
+                            click1 = "nada"
+                            click2 = "nada mesmo"
+
+                            const foiClicado1 = document.querySelector(".foiClicado");
+                            document.querySelector(".foiClicado").classList.remove("foiClicado");
+                            const foiClicado2 = document.querySelector(".foiClicado");
+                            document.querySelector(".foiClicado").classList.remove("foiClicado");
+                            
+                                foiClicado1.classList.toggle("giragira")
+                                foiClicado2.classList.toggle("giragira")
+
+
+                                setTimeout(function(){
+                                
+                                    foiClicado1.childNodes[1].classList.toggle("rodou");
+                                    foiClicado1.childNodes[3].classList.toggle("rodou");
+                                    foiClicado1.classList.toggle("giragira")
+
+                                    foiClicado2.childNodes[1].classList.toggle("rodou");
+                                    foiClicado2.childNodes[3].classList.toggle("rodou");
+                                    foiClicado2.classList.toggle("giragira")
+
+                                    trava = "sem trava"
+                                
+                                }, 500);
+
+                        }, 1000);                               
+                    }
+                    
+                    
+                
+                } else {
+
+                    click1 = elemento.childNodes[1].childNodes[1].getAttribute('src')
+
+                    elemento.classList.toggle("giragira")
+                    elemento.classList.toggle("foiClicado")
+
+                    setTimeout(function(){
+                        
+                        elemento.childNodes[1].classList.toggle("rodou");
+                        elemento.childNodes[3].classList.toggle("rodou");
+                        elemento.classList.toggle("giragira")
+
+                        trava = "sem trava"
+                        
+                        }, 500);
+                    
+                }   
+                
+            }
+        }
+    }
 }
 
 function cartasNaMesa(){
