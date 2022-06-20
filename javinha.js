@@ -56,7 +56,7 @@ function clickTeste(elemento){
                         pontos += 2
 
                         trava = "sem trava"
-                        
+
                         terminou()
                         
 
@@ -123,8 +123,10 @@ function clickTeste(elemento){
 }
 
 function cartasNaMesa(){
-    quantidade = prompt("Com quantas cartas você quer jogar ? \nLembre-se de colocar um numero par")
-    if (quantidade % 2 !== 0){ cartasNaMesa() }
+    quantidade = prompt("Com quantas cartas você quer jogar ? \nLembre-se de colocar um numero par entre 4 e 14")
+    if (quantidade % 2 !== 0 || quantidade < 4 || quantidade > 14){ cartasNaMesa() }
+    else {
+    
     const elemento = document.querySelector(".caixa-cartas")
 
     for (let i = 0; i < quantidade; i++){
@@ -152,10 +154,11 @@ function cartasNaMesa(){
     </div>
     `;
     }
-   
-
     
     console.log(lista)
+    }
+    
+   
 
 }
 function terminou(){

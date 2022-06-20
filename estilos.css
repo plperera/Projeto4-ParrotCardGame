@@ -28,8 +28,9 @@ body{
     margin: 17px 0;
     display: flex;
     justify-content: center;
-    width: 900px;
+    width: 1100px;
     flex-wrap: wrap;
+
 }
 
 .carta-frente, .carta-costa{
